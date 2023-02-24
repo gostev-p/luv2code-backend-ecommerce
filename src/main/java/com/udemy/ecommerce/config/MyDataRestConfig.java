@@ -1,9 +1,6 @@
 package com.udemy.ecommerce.config;
 
-import com.udemy.ecommerce.entity.Country;
-import com.udemy.ecommerce.entity.Product;
-import com.udemy.ecommerce.entity.ProductCategory;
-import com.udemy.ecommerce.entity.State;
+import com.udemy.ecommerce.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +38,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
         disableHttpMethods(Country.class, config, theUnsupportedActions);
         disableHttpMethods(State.class, config, theUnsupportedActions);
+        disableHttpMethods(Order.class, config, theUnsupportedActions);
 
         exposeIds(config);
 
@@ -56,7 +54,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
     }
 
     private void exposeIds(RepositoryRestConfiguration configuration){
-        // expose entitity ids
+        // expose entity ids
 
         // gets a list of all entity classes from the entity manager
         Set<EntityType<?>> entityTypes = entityManager.getMetamodel().getEntities();
